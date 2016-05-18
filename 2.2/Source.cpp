@@ -58,3 +58,4 @@ void main()
 	cout << counter;
 	cout << " have salary more than setted." << endl;
 }
+11
