@@ -8,12 +8,29 @@ struct Employee
 {
 	string FIO;
 	int salary;
-	Employee *next;
+	Employee *next=NULL;
 };
 
 void main()
 {
-	Employee *E, *Es;
+	Employee *E, *Es, *Et, *current, *parent;
+
+/*	E = 0;
+
+	while (1)
+	{
+		if (E == 0)
+		
+		E = new Employee;
+		
+		cout << "Input FIO\n";
+		cin >> E->FIO;
+		if ((E->FIO) == "0") break;
+		cout << "Input salary for " + E->FIO + "\n";
+		cin >> E->salary;
+		system("cls");
+	}*/
+
 	Es = new Employee;
 	E = Es;
 	while (1)
@@ -44,21 +61,27 @@ void main()
 	cout << "Set the salary" << endl;
 	cin >> ssalary;
 
-	E = Es;
-	while (E)
+	Et = Es;
+	while (Et)
 	{
+		E = Et;
+		if (E->FIO == "0") break;
 		if (E->salary > ssalary)
 		{
 			cout << E->FIO + " " << E->salary << endl;
-			counter++;
-			E = E->next;
+			counter++; 
+			parent = Et;
+			Et = E->next;
+			current = Et;
 		}
 		else
 		{
-			E = E->next;
+			parent = Et;
+			Et = E->next;
 			delete E;
+			current = Et;
 		}
-		
+		parent = current;
 	}
 	cout << counter;
 	cout << " have salary more than setted." << endl;
