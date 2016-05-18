@@ -20,7 +20,7 @@ void main()
 	{
 		cout << "Input FIO\n";
 		cin >> E->FIO;
-		if ((E->FIO) == "xxx") break;
+		if ((E->FIO) == "0") break;
 		cout << "Input salary for " + E->FIO + "\n";
 		cin >> E->salary;
 		system("cls");
@@ -29,13 +29,13 @@ void main()
 
 	}
 	system("cls");
-	E = Es;
 	
-	while (1)
+	E = Es;
+	while (E)
 	{
+		if (E->FIO == "0") break;
 		cout << E->FIO + " " << E->salary << endl;
 		E = E->next;
-		if ((E->FIO) == "xxx") break;
 	}
 
 	system("pause");
@@ -45,17 +45,21 @@ void main()
 	cin >> ssalary;
 
 	E = Es;
-	while (1)
+	while (E)
 	{
 		if (E->salary > ssalary)
 		{
 			cout << E->FIO + " " << E->salary << endl;
 			counter++;
+			E = E->next;
 		}
-		E = E->next;
-		if ((E->FIO) == "xxx") break;
+		else
+		{
+			E = E->next;
+			delete E;
+		}
+		
 	}
 	cout << counter;
 	cout << " have salary more than setted." << endl;
 }
-11
