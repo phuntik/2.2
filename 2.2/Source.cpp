@@ -89,9 +89,9 @@ void main()
 		}
 		else
 		{
-			if (E == Estart) // для случая, когда рассматриваемый элемент - первый
+			if (E == Estart) // perviy
 			{
-				if (E->next == NULL) // для случая, когда рассматриваемый элемент - первый и единственный
+				if (E->next == NULL) // perviy i edinstvenniy
 				{
 					delete E;
 					break;
@@ -100,13 +100,13 @@ void main()
 				delete E;
 				E = Estart;
 			}
-			if (E->next == NULL) // для случая, когда рассматриваемый элемент - последний в списке
+			if (E->next == NULL) // posledniy
 			{
 				delete E;
 				Etemp->next = NULL;
 				break;
 			}
-			Etemp->next = E->next; // для общего случая, когда элемент в середине списка
+			Etemp->next = E->next; // v seredine
 			delete E;
 			E = Etemp->next;
 		}
