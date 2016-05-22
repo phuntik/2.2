@@ -13,7 +13,7 @@ struct Employee
 
 void main()
 {
-	Employee *E, *Es, *Et, *current, *parent;
+	Employee *E, *Estart, *Etemp;
 
 /*	E = 0;
 
@@ -31,38 +31,88 @@ void main()
 		system("cls");
 	}*/
 
-	Es = new Employee;
-	E = Es;
+	Estart = new Employee;
+	E = Estart;
+	string temp;
+	bool first=true;
 	while (1)
-	{
+	{		
 		cout << "Input FIO\n";
-		cin >> E->FIO;
-		if ((E->FIO) == "0") break;
-		cout << "Input salary for " + E->FIO + "\n";
-		cin >> E->salary;
-		system("cls");
-		E->next = new Employee;
-		E = E->next;
+		cin >> temp;
+		if ((temp) == "0") break;
+		if (first == true)
+		{
+			Estart->FIO = temp;
+			cout << "Input salary for " + Estart->FIO + "\n";
+			cin >> Estart->salary;
+			system("cls");
+			first = false;
+		}
+		else
+		{
+			E->next = new Employee;
+			E = E->next;
+			E->FIO = temp;
+			cout << "Input salary for " + E->FIO + "\n";
+			cin >> E->salary;
+			system("cls");
+		}
 
 	}
 	system("cls");
 	
-	E = Es;
+	E = Estart;
 	while (E)
 	{
-		if (E->FIO == "0") break;
 		cout << E->FIO + " " << E->salary << endl;
+		if (E->next == NULL) break;
 		E = E->next;
 	}
-
+	
 	system("pause");
 	system("cls");
 	int ssalary, counter=0;
 	cout << "Set the salary" << endl;
 	cin >> ssalary;
 
-	Et = Es;
-	while (Et)
+	E = Estart;
+	Etemp = E;
+	while (E)
+	{
+		if (E->salary > ssalary)
+		{
+			cout << E->FIO + " " << E->salary << endl;
+			counter++;
+			if (E->next == NULL) break;
+			Etemp = E;
+			E = E->next;
+		}
+		else
+		{
+			if (E == Estart) // для случая, когда рассматриваемый элемент - первый
+			{
+				if (E->next == NULL) // для случая, когда рассматриваемый элемент - первый и единственный
+				{
+					delete E;
+					break;
+				}
+				Estart = E->next;
+				delete E;
+				E = Estart;
+			}
+			if (E->next == NULL) // для случая, когда рассматриваемый элемент - последний в списке
+			{
+				delete E;
+				Etemp->next = NULL;
+				break;
+			}
+			Etemp->next = E->next; // для общего случая, когда элемент в середине списка
+			delete E;
+			E = Etemp->next;
+		}
+
+	}
+	/*while (E)
 	{
 		E = Et;
 		if (E->FIO == "0") break;
@@ -83,6 +133,7 @@ void main()
 		}
 		parent = current;
 	}
+	*/
 	cout << counter;
 	cout << " have salary more than setted." << endl;
 }
