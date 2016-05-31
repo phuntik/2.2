@@ -14,23 +14,6 @@ struct Employee
 void main()
 {
 	Employee *E, *Estart, *Etemp;
-
-/*	E = 0;
-
-	while (1)
-	{
-		if (E == 0)
-		
-		E = new Employee;
-		
-		cout << "Input FIO\n";
-		cin >> E->FIO;
-		if ((E->FIO) == "0") break;
-		cout << "Input salary for " + E->FIO + "\n";
-		cin >> E->salary;
-		system("cls");
-	}*/
-
 	Estart = new Employee;
 	E = Estart;
 	string temp;
@@ -99,41 +82,22 @@ void main()
 				Estart = E->next;
 				delete E;
 				E = Estart;
+				Etemp = E; //it will be used as link to the previous structure
 			}
+			
 			if (E->next == NULL) // posledniy
 			{
 				delete E;
 				Etemp->next = NULL;
 				break;
 			}
+			
 			Etemp->next = E->next; // v seredine
 			delete E;
 			E = Etemp->next;
 		}
 
 	}
-	/*while (E)
-	{
-		E = Et;
-		if (E->FIO == "0") break;
-		if (E->salary > ssalary)
-		{
-			cout << E->FIO + " " << E->salary << endl;
-			counter++; 
-			parent = Et;
-			Et = E->next;
-			current = Et;
-		}
-		else
-		{
-			parent = Et;
-			Et = E->next;
-			delete E;
-			current = Et;
-		}
-		parent = current;
-	}
-	*/
 	cout << counter;
 	cout << " have salary more than setted." << endl;
 }
